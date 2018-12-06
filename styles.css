@@ -1,0 +1,101 @@
+.page-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.side{
+  text-align: center;
+  width:19%;
+  border: 1px solid black;
+}
+
+/* #saved-drinks{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+} */
+
+#saved-drink-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-flow: column;
+}
+
+#drinks{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width:60%;
+  height: 550px;
+  border: 1px solid ;
+  overflow:scroll;
+}
+
+#drink-form-container{
+
+}
+
+
+.single-drink{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.drink-pic{
+  float: left;
+  width: 10%;
+  display: inline-block;
+}
+
+
+.drink-info{
+  display: inline-block;
+  width: 89%;
+  border: 1px solid black;
+}
+
+.drink-ingredients{
+  border: 1px solid black;
+  height: 45px;
+  overflow:scroll;
+}
+
+#app-name{
+  width:100%;
+  text-align: center;
+}
+
+#navigation{
+  width:100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.input{
+  width: 95%;
+}
+
+.textarea{
+  word-wrap: break-word;
+  height: 50px;
+}
+
+p.drink-name{
+  margin: 2px 0px;
+}
+
+img{
+  width:100%;
+}
+
+#saved-drink-container{
+
+}
+
+.saved-or-not{
+  opacity: 0.65;
+}
