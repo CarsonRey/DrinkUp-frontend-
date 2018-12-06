@@ -269,9 +269,9 @@ function getChosenDrink(drinks, chosenDrink){
   drinks.forEach((drink)=> {
     drink.ingredients.forEach((ingredient)=> {
     ingredientList += `<li>${ingredient.name}</li>`
-    if(ingredient.name === chosenDrink){
-      drinksContainer.innerHTML += constructDrink(drink, ingredientList)
-    }
+      if(ingredient.name === chosenDrink){
+        drinksContainer.innerHTML += constructDrink(drink, ingredientList)
+      }
     })
   })
 }
