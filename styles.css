@@ -1,13 +1,12 @@
 .page-container{
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .side{
   text-align: center;
   width:19%;
-  border: 1px solid black;
 }
 
 /* #saved-drinks{
@@ -20,7 +19,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex-flow: column;
+  height: 450px;
+  overflow: scroll;
 }
 
 #drinks{
@@ -29,12 +29,11 @@
   justify-content: center;
   width:60%;
   height: 550px;
-  border: 1px solid ;
   overflow:scroll;
 }
 
 #drink-form-container{
-
+  height: 550px;
 }
 
 
@@ -42,24 +41,32 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
+  border: 1px solid white;
+  border-radius: 15px;
+  margin: 0px 5px 10px 5px;
+  background-color: white;
+  background: rgba(255,255,255, 0.75);
+}
+
+.drink-pic-container{
+  
+  /* max-width: 50%;
+  max-height: 50%; */
 }
 
 .drink-pic{
-  float: left;
-  width: 10%;
-  display: inline-block;
+  max-width: 60%;
+  max-height: 100%;
 }
 
 
 .drink-info{
-  display: inline-block;
   width: 89%;
   border: 1px solid black;
 }
 
 .drink-ingredients{
-  border: 1px solid black;
   height: 45px;
   overflow:scroll;
 }
@@ -83,19 +90,87 @@
   word-wrap: break-word;
   height: 50px;
 }
-
-p.drink-name{
+.drink-name{
   margin: 2px 0px;
+  color: #d46d70;
+
+  font-family: Delicious;
+  text-shadow:
+  -1px -1px 0 #3d5962,
+   1px -1px 0 #3d5962,
+   -1px 1px 0 #3d5962,
+    1px 1px 0 #3d5962;
 }
 
 img{
   width:100%;
 }
 
-#saved-drink-container{
-
-}
-
 .saved-or-not{
   opacity: 0.65;
+}
+
+.rounded{
+  border-radius: 15px;
+  background-color: white;
+  background: rgba(255,255,255, 0.5);
+  border: 0.5px solid white;
+}
+
+.myVideo{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  min-height: 100%;
+  z-index: -99;
+  opacity: .75;
+}
+
+
+.font{
+  color: white;
+
+  font-family: Delicious;
+  text-shadow:
+  -1px -1px 0 #808080,
+   1px -1px 0 #808080,
+   -1px 1px 0 #808080,
+    1px 1px 0 #808080;
+}
+
+.header{
+    border: 0.5px solid white;
+    border-radius: 20px;
+}
+
+.form{
+  margin: 11% 25% 11% 25%;
+}
+
+.frontpage{
+  padding: 10% 10%;
+}
+
+.input{
+  margin-top: 15px;
+  border-radius: 20px;
+}
+
+.btn{
+  margin-left: 25px;
+  padding: 5px 0px;
+}
+
+@font-face{
+  font-family: 'Delicious';
+  src: url('Delicious'); /* IE9 Compat Modes */
+  src: url('Delicious.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Delicious.woff2') format('woff2'), /* Super Modern Browsers */
+       /* url('Delicious.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Delicious.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('Delicious.svg#svgFontName') format('svg'); /* Legacy iOS */
 }

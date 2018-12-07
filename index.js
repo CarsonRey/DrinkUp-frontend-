@@ -26,67 +26,60 @@ document.addEventListener('DOMContentLoaded', ()=>{
   })
   })
 
-function returningUser(){
-  let username = document.querySelector('#returning-user').value
-  fetch('http://localhost:3000/users')
-  .then(response=> response.json())
-  .then(users => {
-    users.forEach((user)=>{
-      user.username === username ? getDrinks(user) : null
+  let savedContainer = document.querySelector('#saved-drinks')
+  savedContainer.addEventListener('click', ()=> {
+    let button = event.target
+    if(button.className === 'remove'){
+      let userId = savedContainer.dataset.id
+      let drinkId = button.dataset.id
+      deleteDrink(userId, drinkId)
+    }
+  })
+
+  function deleteDrink(userId, drinkId){
+    fetch('http://localhost:3000/user_drinks', {method: "DELETE"})
+  }
+
+  function returningUser(){
+    let username = document.querySelector('#returning-user').value
+    fetch('http://localhost:3000/users')
+    .then(response=> response.json())
+    .then(users => {
+      users.forEach((user)=>{
+        user.username === username ? getDrinks(user) : null
+      })
     })
+  }
+
+  document.querySelector('#drink-form-container').addEventListener('submit', ()=> {
+    event.preventDefault()
+    let drink = document.querySelector('#new-drink').value
+    let ingredientsText = document.querySelector('.textarea').value
+    let ingredients = separateIngredients(ingredientsText)
+    createDrink(drink, ingredients)
   })
-}
 
-document.querySelector('#drink-form-container').addEventListener('submit', ()=> {
-  event.preventDefault()
-  let drink = document.querySelector('#new-drink').value
-  let ingredientsText = document.querySelector('.textarea').value
-  let ingredients = separateIngredients(ingredientsText)
-  createDrink(drink, ingredients)
-})
+  function createDrink(drinkName, ingredientsArray){
+    let drinksContainer = document.querySelector('#drinks')
 
-function createDrink(drinkName, ingredientsArray){
-  let drinksContainer = document.querySelector('#drinks')
+    fetch('http://localhost:3000/drinks', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name: drinkName})
+    }).then(response => response.json()).then( drink => {
 
-  fetch('http://localhost:3000/drinks', {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({name: drinkName})
-  }).then(response => response.json()).then( drink => {
-
-    ingredientsArray.forEach((ingredient) => findOrCreateIngredient(drink, ingredient))
-  let ingredientList = ''
-  drink.ingredients.forEach((ingredient)=> {
-    ingredientList += `<li>${ingredient.name}</li>`
+      ingredientsArray.forEach((ingredient) => findOrCreateIngredient(drink, ingredient))
+    let ingredientList = ''
+    drink.ingredients.forEach((ingredient)=> {
+      ingredientList += `<li>${ingredient.name}</li>`
+    })
+      drinksContainer.innerHTML += constructDrink(drink, ingredientList, 'save')
   })
-    drinksContainer.innerHTML += constructDrink(drink, ingredientList)
-})
 
+  }
 
-
-    // updateDrinksContainer()
-
-}
-//
-// function updateDrinksContainer(){
-//   let drinksContainer = document.querySelector('#drinks')
-//   fetch('http://localhost:3000/drinks')
-//   .then(response => response.json())
-//   .then(drinks => {
-//     let drinksContainer = document.querySelector('#drinks')
-//     drinksContainer.innerHTML = ''
-//     drinks.forEach((drink)=> {
-//       let ingredientList = ''
-//       drink.ingredients.forEach((ingredient)=> {
-//         ingredientList += `<li>${ingredient.name}</li>`
-//       })
-//       drinksContainer.innerHTML += constructDrink(drink, ingredientList)
-//
-//     })
-//   })
-// }
 
 function separateIngredients(ingredients){
   if (ingredients.includes(" ")){
@@ -99,12 +92,6 @@ function separateIngredients(ingredients){
     x = ingredients.split(",") // we want to capitalize as well!
   }
 }
-
-// function capitalizeIngredients(ingredients){
-//   ingredients.forEach((ingredient) => {
-//     if(ingredient.includes(" "))
-//   })
-// }
 
 function findOrCreateIngredient(drink, ingredient){
 
@@ -175,21 +162,22 @@ function getDrinks(user){
       drink.ingredients.forEach((ingredient)=> {
         ingredientList += `<li>${ingredient.name}</li>`
       })
-      drinksContainer.innerHTML += constructDrink(drink, ingredientList)
+      drinksContainer.innerHTML += constructDrink(drink, ingredientList, 'save')
 
     })
   })
   checkUserDrinks(user)
 }
 
-function constructDrink(drink, ingredientList){
+function constructDrink(drink, ingredientList, className){
   return `<div class="single-drink" class='saved-or-not' data-id='${drink.id}'>
-  <div class='drink-pic'><img  src='https://cdn3.iconfinder.com/data/icons/food-drinks-and-agriculture-1/64/C_Cheers-512.png' height=65px></div>
+  <div class='drink-pic-container'><img class='drink-pic' src='https://cdn3.iconfinder.com/data/icons/food-drinks-and-agriculture-1/64/C_Cheers-512.png' ></div>
 
   <div class="drink-info">
-    <p class='drink-name'>${drink.name} <button class='save' data-id='${drink.id}' type="button" name="button">Save</button></p>
+    <p class='drink-name'>${drink.name}
+    <button class='${className}' data-id='${drink.id}' type="button" name="button">${capitalize(className)}</button></p>
 
-    <div class="drink-ingredients">${ingredientList}</div>
+    <div class="drink-ingredients font">${ingredientList}</div>
   </div>`
 }
 
@@ -222,7 +210,7 @@ function getSavedDrinks(user){
     drink.ingredients.forEach((ingredient) => {
       ingredientList += `<li>${ingredient.name}</li>`
     })
-    savedDrinks.innerHTML += constructDrink(drink, ingredientList)
+    savedDrinks.innerHTML += constructDrink(drink, ingredientList, 'remove')
   })
 }
 
@@ -237,7 +225,7 @@ function filterDrinks(input){
       drink.ingredients.forEach((ingredient)=> {
         ingredientList += `<li>${ingredient.name}</li>`
         if (ingredient.name.includes(input)){
-            drinksList.innerHTML += constructDrink(drink, ingredientList)
+            drinksList.innerHTML += constructDrink(drink, ingredientList, 'save')
         }
       })
     })
@@ -261,7 +249,6 @@ function showFiltered(chosenDrink){
   })
 }
 
-
 function getChosenDrink(drinks, chosenDrink){
   let drinksContainer = document.querySelector('#drinks')
   drinksContainer.innerHTML = ''
@@ -270,7 +257,7 @@ function getChosenDrink(drinks, chosenDrink){
     drink.ingredients.forEach((ingredient)=> {
     ingredientList += `<li>${ingredient.name}</li>`
       if(ingredient.name === chosenDrink){
-        drinksContainer.innerHTML += constructDrink(drink, ingredientList)
+        drinksContainer.innerHTML += constructDrink(drink, ingredientList, 'save')
       }
     })
   })
@@ -284,7 +271,7 @@ function getAllDrinks(drinks){
     drink.ingredients.forEach((ingredient)=> {
     ingredientList += `<li>${ingredient.name}</li>`
     })
-     drinksContainer.innerHTML += constructDrink(drink, ingredientList)
+     drinksContainer.innerHTML += constructDrink(drink, ingredientList, 'save')
   })
 }
 

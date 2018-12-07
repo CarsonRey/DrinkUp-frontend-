@@ -6,7 +6,7 @@
     <title>Drink Up!🍸</title>
   </head>
   <body class="page-container">
-    <h1 id='app-name'>Drink Up! 🍸</h1>
+    <h1 id='app-name' class="font header">Drink Up! 🍸</h1>
     <div id="navigation">
       <select id='selector' name="spirit">
         <option value="prompt">All Drinks</option>
@@ -16,41 +16,47 @@
         <option value="Gin">Gin</option>
         <option value="Tequila">Tequila</option>
       </select>
-        <input id="filter-input" type="text" name="filter" value="" placeholder="Search for ingredients...">
+        <input id="filter-input" type="text"
+        class="input" name="filter" value="" placeholder="Search for ingredients...">
     </div>
-    <div id="saved-drinks" data-id='' data-username='' class="side">
-      <h3 style='text-align:center;'>Saved Drinks</h3>
-      <p id='saved-message'>Sign in to save Drinks!</p>
+    <div id="saved-drinks" data-id='' data-username='' class="side rounded">
+      <h3 style='text-align:center;' class="font ">Saved Drinks</h3>
+      <p id='saved-message' class="font">Sign in to save Drinks!</p>
       <!-- SAVED DRINKS GO HERE -->
       <div id="saved-drink-container">
 
       </div>
     </div>
-    <div id="drinks">
+    <div id="drinks" class="rounded" class="font">
       <!--  DRINKS GO HERE -->
 
-      <form class="login" action="index.html" method="post">
-        <input id='returning-user' type="text" name="username" value="">
-        <input type="submit" name="submit" value="Log In">
+      <form class="login form" action="index.html" method="post">
+        <input id='returning-user' type="text" name="username" class="frontpage input" value="">
+        <input type="submit" name="submit" class="input btn font" value="Log In">
       </form>
 
-      <form class="signup" action="index.html" method="post">
-        <input id='new-user' type="text" name="username" value="">
-        <input type="submit" name="submit" value="Sign Up">
+      <form class="signup form" action="index.html" method="post">
+        <input id='new-user'class="frontpage input" type="text" name="username" value="">
+        <input type="submit" name="submit" class="input btn font" value="Sign Up">
       </form>
 
     </div>
-    <div id="drink-form-container" class="side">
-      <h3>Add Your Own Drink!</h3>
+    <div id="drink-form-container" class="side rounded">
+      <h3 class="font">Add Your Own Drink!</h3>
       <form id="drink-form" action="index.html" method="post">
         <input class="input" id='new-drink' type="text" name="name" value="" placeholder="Drink name">
         <textarea  class="input textarea" id='new-drink-ingredients' name="ingredients" rows="8" cols="80" placeholder="Ingredients...(separate with commas)"></textarea>
         <br>
         <input type="submit" name="submit" value="Submit">
-
       </form>
     </div>
   </body>
+
+<video class="myVideo" autoplay muted loop>
+  <source src="../newclip.mov" type="video/mp4">
+  <source src="../newclip.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
 
   <script type="text/javascript" src="index.js"></script>
 </html>
