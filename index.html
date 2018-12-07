@@ -8,14 +8,17 @@
   <body class="page-container">
     <h1 id='app-name' class="font header">Drink Up! 🍸</h1>
     <div id="navigation">
-      <select id='selector' name="spirit">
-        <option value="prompt">All Drinks</option>
-        <option value="Vodka">Vodka</option>
-        <option value="Whiskey">Whiskey</option>
-        <option value="Rum">Rum</option>
-        <option value="Gin">Gin</option>
-        <option value="Tequila">Tequila</option>
-      </select>
+      <div class="styled-select">
+        <select id='selector' name="spirit" >
+          <option value="prompt">All Drinks</option>
+          <option value="Vodka">Vodka</option>
+          <option value="Whiskey">Whiskey</option>
+          <option value="Rum">Rum</option>
+          <option value="Gin">Gin</option>
+          <option value="Tequila">Tequila</option>
+        </select>
+      </div>
+
         <input id="filter-input" type="text"
         class="input" name="filter" value="" placeholder="Search for ingredients...">
     </div>
